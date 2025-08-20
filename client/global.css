@@ -1,0 +1,325 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Loading Screen Animations */
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(180deg);
+  }
+}
+
+.animate-shimmer {
+  animation: shimmer 2s infinite;
+}
+
+.animate-float {
+  animation: float 3s infinite ease-in-out;
+}
+
+@layer base {
+  /**
+   * Casino-style Luxury Theme
+   * Enhanced color palette for premium gaming experience
+   */
+  :root {
+    /* Light theme - Elegant casino light mode */
+    --background: 0 0% 98%;
+    --foreground: 240 10% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 15%;
+
+    --primary: 45 93% 47%; /* Casino gold */
+    --primary-foreground: 240 10% 15%;
+
+    --secondary: 240 6% 94%;
+    --secondary-foreground: 240 8% 25%;
+
+    --muted: 240 6% 94%;
+    --muted-foreground: 240 6% 50%;
+
+    --accent: 45 93% 95%;
+    --accent-foreground: 45 93% 25%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 240 6% 88%;
+    --input: 240 6% 88%;
+    --ring: 45 93% 47%;
+
+    --success: 142 76% 36%;
+    --success-foreground: 0 0% 100%;
+
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 100%;
+
+    --radius: 0.75rem;
+
+    /* Casino-specific colors */
+    --casino-gold: 45 93% 47%;
+    --casino-silver: 240 6% 75%;
+    --casino-bronze: 30 100% 40%;
+    --casino-royal: 260 100% 25%;
+    --casino-emerald: 160 100% 25%;
+  }
+
+  .dark {
+    /* Dark theme - Luxurious casino night mode */
+    --background: 240 10% 4%;
+    --foreground: 45 93% 90%;
+
+    --card: 240 8% 8%;
+    --card-foreground: 45 93% 90%;
+
+    --popover: 240 8% 8%;
+    --popover-foreground: 45 93% 90%;
+
+    --primary: 45 93% 55%; /* Brighter gold in dark mode */
+    --primary-foreground: 240 10% 10%;
+
+    --secondary: 240 8% 12%;
+    --secondary-foreground: 45 93% 80%;
+
+    --muted: 240 8% 12%;
+    --muted-foreground: 240 6% 60%;
+
+    --accent: 45 93% 15%;
+    --accent-foreground: 45 93% 80%;
+
+    --destructive: 0 75% 55%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 240 8% 18%;
+    --input: 240 8% 18%;
+    --ring: 45 93% 55%;
+
+    --success: 142 76% 45%;
+    --success-foreground: 0 0% 100%;
+
+    --warning: 38 92% 60%;
+    --warning-foreground: 0 0% 100%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans;
+    transition:
+      background-color 0.3s ease,
+      color 0.3s ease;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  /* Casino-style glowing effects */
+  .casino-glow {
+    position: relative;
+  }
+
+  .casino-glow::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    padding: 2px;
+    background: linear-gradient(45deg, #fbbf24, #f59e0b, #d97706, #fbbf24);
+    border-radius: inherit;
+    mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    mask-composite: xor;
+    -webkit-mask-composite: xor;
+    animation: casino-glow 2s linear infinite;
+  }
+
+  .casino-shimmer {
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(251, 191, 36, 0.4),
+      transparent
+    );
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite;
+  }
+
+  .casino-pulse {
+    animation: casino-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  /* Luxury button styles */
+  .btn-luxury {
+    @apply relative overflow-hidden bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 text-black font-bold py-3 px-6 rounded-xl shadow-lg transition-all duration-300 transform hover:scale-105 hover:shadow-2xl;
+  }
+
+  .btn-luxury::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.4),
+      transparent
+    );
+    transition: left 0.5s;
+  }
+
+  .btn-luxury:hover::before {
+    left: 100%;
+  }
+
+  /* Card enhancements */
+  .card-luxury {
+    @apply bg-gradient-to-br from-slate-800/90 via-slate-900/90 to-slate-800/90 border border-yellow-500/30 shadow-2xl backdrop-blur-sm;
+  }
+
+  .card-luxury-light {
+    @apply bg-gradient-to-br from-white via-gray-50 to-white border border-yellow-400/40 shadow-xl backdrop-blur-sm;
+  }
+
+  /* Text effects */
+  .text-casino-gold {
+    @apply bg-gradient-to-r from-yellow-400 via-yellow-300 to-yellow-500 bg-clip-text text-transparent;
+  }
+
+  .text-casino-silver {
+    @apply bg-gradient-to-r from-slate-300 via-slate-200 to-slate-400 bg-clip-text text-transparent;
+  }
+
+  /* Tab enhancements */
+  .tab-luxury-active {
+    @apply bg-gradient-to-br from-yellow-400 to-yellow-600 shadow-lg border border-white/20 text-black;
+    box-shadow: 0 0 20px rgba(251, 191, 36, 0.4);
+  }
+
+  .tab-luxury-inactive {
+    @apply text-slate-300 hover:text-white hover:bg-slate-600/50 border border-transparent transition-all duration-300;
+  }
+}
+
+@layer utilities {
+  /* Custom animations */
+  @keyframes casino-glow {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes shimmer {
+    0% {
+      background-position: -200% 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
+  }
+
+  @keyframes casino-pulse {
+    0%,
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.8;
+      transform: scale(1.05);
+    }
+  }
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  @keyframes sparkle {
+    0%,
+    100% {
+      opacity: 0;
+      transform: scale(0) rotate(0deg);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1) rotate(180deg);
+    }
+  }
+
+  /* Utility classes */
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  .animate-sparkle {
+    animation: sparkle 2s ease-in-out infinite;
+  }
+
+  .slow {
+    animation-duration: 3s;
+  }
+
+  /* Smooth transitions for theme changes */
+  .transition-theme {
+    transition:
+      background-color 0.3s ease,
+      color 0.3s ease,
+      border-color 0.3s ease;
+  }
+
+  /* Glass morphism effects */
+  .glass {
+    @apply backdrop-blur-md bg-white/10 border border-white/20;
+  }
+
+  .glass-dark {
+    @apply backdrop-blur-md bg-black/20 border border-white/10;
+  }
+
+  /* Premium shadows */
+  .shadow-luxury {
+    box-shadow:
+      0 25px 50px -12px rgba(0, 0, 0, 0.25),
+      0 0 30px rgba(251, 191, 36, 0.1);
+  }
+
+  .shadow-luxury-gold {
+    box-shadow:
+      0 25px 50px -12px rgba(251, 191, 36, 0.3),
+      0 0 30px rgba(251, 191, 36, 0.2);
+  }
+}
